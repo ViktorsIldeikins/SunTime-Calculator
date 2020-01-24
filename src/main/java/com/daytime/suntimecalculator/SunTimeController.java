@@ -4,9 +4,7 @@ import com.daytime.suntimecalculator.dto.SunTimes;
 import com.daytime.suntimecalculator.service.ApiCommunicator;
 import com.daytime.suntimecalculator.service.TimeLocalizer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class SunTimeController {
@@ -22,9 +20,9 @@ public class SunTimeController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/sunset-sunrise/today")
-    public SunTimes getTimeForToday() {
+    public SunTimes getTimeForToday(@RequestParam String latitude, @RequestParam String longitude) {
         System.out.println("Received request");
-        SunTimes sunTimes = communicator.requestTimes();
+        SunTimes sunTimes = communicator.requestTimes(latitude, longitude);
         return localizer.localizeTime(sunTimes);
     }
 }

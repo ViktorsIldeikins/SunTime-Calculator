@@ -1,7 +1,6 @@
 package com.daytime.suntimecalculator.dto;
 
 import java.time.LocalTime;
-import java.util.Date;
 
 public class SunTimes {
 

@@ -14,15 +14,13 @@ import java.time.format.DateTimeFormatter;
 public class ApiCommunicator {
 
     private static final String BASE_URL = "https://api.sunrise-sunset.org/json";
-    private static final String LATITUDE = "56.946285";
-    private static final String LONGITUDE = "24.105078";
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("h:mm:ss a");
 
-    public SunTimes requestTimes() {
+    public SunTimes requestTimes(String latitude, String longitude) {
         RestTemplate restTemplate = new RestTemplate();
         UriComponentsBuilder uri = UriComponentsBuilder.fromHttpUrl(BASE_URL)
-                .queryParam("lat", LATITUDE)
-                .queryParam("lng", LONGITUDE);
+                .queryParam("lat", latitude)
+                .queryParam("lng", longitude);
         ResponseEntity<ApiResponse> response = restTemplate.getForEntity(uri.toUriString(), ApiResponse.class);
         ApiResponse responseBody = response.getBody();
 
